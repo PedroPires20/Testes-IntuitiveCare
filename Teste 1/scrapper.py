@@ -1,7 +1,7 @@
 import os
 import shutil
 import urllib3
-from http.client import HTTP_PORT, responses as status_messages
+from http.client import responses as status_messages
 from bs4 import BeautifulSoup
 
 # This function receives an integer, representing a HTTP status code and returns
@@ -49,29 +49,31 @@ def get_file_urls(response_bytes):
 def download_file(url, output_path):
     # Getting the name of the file from it's URL
     file_name = urllib3.util.url.parse_url(url).path.split('/')[-1]
-    try:
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-        http_client = urllib3.PoolManager()
-        response = http_client.request("GET", url)
-        if not success_status(response.status):
-            raise RuntimeError('HTTP request failed with status code {}: "{}"'
-            .format(response.status, status_messages[response.status]))
-        with open(os.path.join(output_path, file_name), "wb") as output_file:
-            output_file.write(response.data)
-    except Exception as e:
-        raise e
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    http_client = urllib3.PoolManager()
+    response = http_client.request("GET", url)
+    if not success_status(response.status):
+        raise RuntimeError('HTTP request failed with status code {}: "{}"'
+        .format(response.status, status_messages[response.status]))
+    with open(os.path.join(output_path, file_name), "wb") as output_file:
+        output_file.write(response.data)
 
 if __name__ == "__main__":
     TARGET_URL = "https://www.gov.br/ans/pt-br/assuntos/consumidor/o-que-o-seu-plano-de-saude-deve-cobrir-1/o-que-e-o-rol-de-procedimentos-e-evento-em-saude"
     TEMPORARY_DIRECTORY = ".temp"
     OUTPUT_ZIP_NAME = "Anexos - Teste 1"
-    response_data = fetch_url(TARGET_URL)
-    file_urls = get_file_urls(response_data)
-    for file_url in file_urls:
-        download_file(file_url, TEMPORARY_DIRECTORY)
-    # Creating the zip file with the downloaded files
-    shutil.make_archive(OUTPUT_ZIP_NAME, "zip", TEMPORARY_DIRECTORY)
-    # Cleanup: removing the temporary directory (any errors in this operation are ignored)
-    shutil.rmtree(TEMPORARY_DIRECTORY, ignore_errors=True)
-    
+    try:
+        response_data = fetch_url(TARGET_URL)
+        file_urls = get_file_urls(response_data)
+        for file_url in file_urls:
+            download_file(file_url, TEMPORARY_DIRECTORY)
+        # Creating the zip file with the downloaded files
+        shutil.make_archive(OUTPUT_ZIP_NAME, "zip", TEMPORARY_DIRECTORY)
+    except Exception as exception:
+        print("Ocorreu um erro no processamento do script de scraping!\nErro encontrado: {}"
+            .format(exception))
+    finally:
+        # Cleanup: removing the temporary directory (any errors in this operation are ignored)
+        shutil.rmtree(TEMPORARY_DIRECTORY, ignore_errors=True)
+        
