@@ -72,5 +72,6 @@ if __name__ == "__main__":
         download_file(file_url, TEMPORARY_DIRECTORY)
     # Creating the zip file with the downloaded files
     shutil.make_archive(OUTPUT_ZIP_NAME, "zip", TEMPORARY_DIRECTORY)
-    # Cleanup: removing the temporary directory
-    os.rmdir(TEMPORARY_DIRECTORY)
+    # Cleanup: removing the temporary directory (any errors in this operation are ignored)
+    shutil.rmtree(TEMPORARY_DIRECTORY, ignore_errors=True)
+    
