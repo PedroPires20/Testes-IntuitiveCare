@@ -65,7 +65,7 @@ def download_file(url, output_path):
 if __name__ == "__main__":
     TARGET_URL = "https://www.gov.br/ans/pt-br/assuntos/consumidor/o-que-o-seu-plano-de-saude-deve-cobrir-1/o-que-e-o-rol-de-procedimentos-e-evento-em-saude"
     TEMPORARY_DIRECTORY = ".temp"
-    OUTPUT_ZIP_NAME = "test1"
+    OUTPUT_ZIP_NAME = "Anexos - Teste 1"
     response_data = fetch_url(TARGET_URL)
     file_urls = get_file_urls(response_data)
     for file_url in file_urls:
