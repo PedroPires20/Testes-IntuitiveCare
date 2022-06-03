@@ -31,7 +31,7 @@ CREATE TABLE Operadoras (
 -- Criando uma tabela para armazenar os dados das demonstrações contábeis das
 -- operadoras nos anos de 2020 e 2021, que estão contidos nos arquivos ".csv" no
 -- diretório "data", separados por trimestre.
-CREATE TABLE Despesas (
+CREATE TABLE Demonstracoes (
 		Registro INT,
         `Data` DATE,
         CDContaContabil INT,
@@ -51,7 +51,7 @@ SET DataRegistro=str_to_date(@date_var, "%d/%m/%Y");
 
 -- Importando os dados dos demonstrativos financeiros:
 LOAD DATA LOCAL INFILE "./data/1T2020.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -60,7 +60,7 @@ IGNORE 1 ROWS
 SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 LOAD DATA LOCAL INFILE "./data/2T2020.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -69,7 +69,7 @@ IGNORE 1 ROWS
 SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 LOAD DATA LOCAL INFILE "./data/3T2020.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -78,7 +78,7 @@ IGNORE 1 ROWS
 SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 LOAD DATA LOCAL INFILE "./data/4T2020.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -87,7 +87,7 @@ IGNORE 1 ROWS
 SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 LOAD DATA LOCAL INFILE "./data/1T2021.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -96,7 +96,7 @@ IGNORE 1 ROWS
 SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 LOAD DATA LOCAL INFILE "./data/2T2021.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -105,7 +105,7 @@ IGNORE 1 ROWS
 SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 LOAD DATA LOCAL INFILE "./data/3T2021.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
@@ -116,9 +116,9 @@ SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",
 -- O CSV Seguinte (do quarto trimestre de 2021), possui uma coluna a mais, com o
 -- saldo inicial, que foi descartada para manter a conformidade com os dados
 -- importados dos CSVs de anos anteriores e com o formato definido para a tabela
--- "Despesas"
+-- "Demonstracoes"
 LOAD DATA LOCAL INFILE "./data/4T2021.csv"  
-INTO TABLE Despesas
+INTO TABLE Demonstracoes
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
@@ -126,14 +126,14 @@ IGNORE 1 ROWS
 SET SaldoFinal=REPLACE(@saldo_var, ",", ".");
 
 -- Consulta para a primeira pergunta:
-SELECT RazaoSocial FROM Operadoras JOIN Despesas ON Operadoras.Registro=Despesas.Registro
+SELECT RazaoSocial FROM Operadoras JOIN Demonstracoes ON Operadoras.Registro=Demonstracoes.Registro
 WHERE `Data` BETWEEN "2021-10-1" AND "2021-12-31"
 AND Descricao LIKE "%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%"
 ORDER BY SaldoFinal DESC
 LIMIT 10;
 
 -- Consulta para a segunda pergunta:
-SELECT RazaoSocial FROM Operadoras JOIN Despesas ON Operadoras.Registro=Despesas.Registro
+SELECT RazaoSocial FROM Operadoras JOIN Demonstracoes ON Operadoras.Registro=Demonstracoes.Registro
 WHERE `Data` BETWEEN "2021-1-1" AND "2021-12-31"
 AND Descricao LIKE "%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%"
 ORDER BY SaldoFinal DESC
