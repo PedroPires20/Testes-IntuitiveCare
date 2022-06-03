@@ -124,17 +124,3 @@ LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
 (`Data`, Registro, CDContaContabil, Descricao, @discard, @saldo_var)
 SET SaldoFinal=REPLACE(@saldo_var, ",", ".");
-
--- Consulta para a primeira pergunta:
-SELECT RazaoSocial FROM Operadoras JOIN Demonstracoes ON Operadoras.Registro=Demonstracoes.Registro
-WHERE `Data` BETWEEN "2021-10-1" AND "2021-12-31"
-AND Descricao LIKE "%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%"
-ORDER BY SaldoFinal DESC
-LIMIT 10;
-
--- Consulta para a segunda pergunta:
-SELECT RazaoSocial FROM Operadoras JOIN Demonstracoes ON Operadoras.Registro=Demonstracoes.Registro
-WHERE `Data` BETWEEN "2021-1-1" AND "2021-12-31"
-AND Descricao LIKE "%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%"
-ORDER BY SaldoFinal DESC
-LIMIT 10;
