@@ -106,9 +106,8 @@ SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",
 
 LOAD DATA LOCAL INFILE "./data/4T2021.csv"  
 INTO TABLE Despesas
-CHARACTER SET latin1
 FIELDS TERMINATED BY ';' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
-(@date_var, Registro, CDContaContabil, Descricao, @saldo_var)
-SET `Data`=str_to_date(@date_Var, "%d/%m/%Y"), SaldoFinal=REPLACE(@saldo_var, ",", ".");
+(`Data`, Registro, CDContaContabil, Descricao, @discard, @saldo_var)
+SET SaldoFinal=REPLACE(@saldo_var, ",", ".");
