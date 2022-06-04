@@ -3,7 +3,7 @@
 ## Dependências utilizadas
 
 Para a implementação da solução deste desafio foram utilizadas as bibliotecas
-[Pandas](https://www.crummy.com/software/BeautifulSoup/),
+[Pandas](https://pandas.pydata.org/),
 [PyPDF2](https://urllib3.readthedocs.io/en/stable) e
 [Camelot](https://camelot-py.readthedocs.io/en/master/) para a linguagem Python.
 A biblioteca Pandas foi utilizada para auxiliar na representação e tratamento
