@@ -31,13 +31,13 @@ o seguinte comando:
 python server.py
 ```
 
-**Obs.:** Em alguns ambientes, pode ser que o executável do interpretador Python3 e do
-gerenciador de pacotes pip sejam disponibilizado com um nome diferente. Sendo
-assim, se algum dos comandos anteriores falhar, basta substituir o nome "python"
-por "python3" e/ou "pip" por "pip3".
-
 Após a execução do comando anterior o servidor estará disponível para atender requisições
 na porta 5000 no IP dá máquina local (*localhost*).
+
+**Obs.:** Em alguns ambientes, pode ser que o executável do interpretador
+Python3 e/ou do gerenciador de pacotes pip sejam disponibilizado com um nome
+diferente. Sendo assim, se algum dos comandos anteriores falhar, basta
+substituir o nome "python" por "python3" e/ou "pip" por "pip3".
 
 ## Especificação da API
 

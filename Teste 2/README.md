@@ -58,16 +58,13 @@ Após instalar as dependências, o script pode ser executado com o seguinte coma
 python pdf_processor.py
 ```
 
-Em alguns ambientes, pode ser que o executável do interpretador Python3 seja
-disponibilizado com um nome diferente. Sendo assim, se o comando anterior
-falhar, basta executar o seguinte comando:
-
-```bash
-python3 pdf_processor.py
-```
-
 Durante a execução, o script gerará alguns feedbacks na tela, informando, por
 exemplo, qual a etapa atual do processamento (processando PDF, gerando CSV,
 etc.) e qual a página sendo processada. Após uma execução bem sucedida do
 script, um arquivo ".zip" é gerado na pasta atual. Esse arquivo contém o arquivo
 ".csv" da tabela extraída a partir do PDF.
+
+**Obs.:** Em alguns ambientes, pode ser que o executável do interpretador
+Python3 e/ou do gerenciador de pacotes pip sejam disponibilizado com um nome
+diferente. Sendo assim, se algum dos comandos anteriores falhar, basta
+substituir o nome "python" por "python3" e/ou "pip" por "pip3".

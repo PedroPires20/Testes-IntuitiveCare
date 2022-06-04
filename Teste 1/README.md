@@ -20,10 +20,9 @@ Após instalar as dependências, o script pode ser executado com o seguinte coma
 python scrapper.py
 ```
 
-Em alguns ambientes, pode ser que o executável do interpretador Python3 seja disponibilizado com um nome diferente. Sendo assim, se o comando anterior falhar, basta executar o seguinte comando:
-
-```bash
-python3 scrapper.py
-```
-
 Após uma execução bem sucedida do script, deve ser gerado, no diretório atual, um arquivo .zip com o nome "Anexos - Teste 1". Caso aconteça algum erro durante a execução, uma mensagem é exibida na linha de comando, sinalizando que ocorreu um erro e informando a causa do problema.
+
+**Obs.:** Em alguns ambientes, pode ser que o executável do interpretador
+Python3 e/ou do gerenciador de pacotes pip sejam disponibilizado com um nome
+diferente. Sendo assim, se algum dos comandos anteriores falhar, basta
+substituir o nome "python" por "python3" e/ou "pip" por "pip3".
